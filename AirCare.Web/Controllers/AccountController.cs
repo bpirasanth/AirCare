@@ -19,7 +19,7 @@ namespace AirCare.Web.Controllers
         public ActionResult SignUp()
         {
             SignUpViewModel model = new SignUpViewModel();
-
+            ViewBag.IsModelValid = true;
             model.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
 
             return View(model);
@@ -28,6 +28,12 @@ namespace AirCare.Web.Controllers
         [HttpPost]
         public ActionResult SignUp(SignUpViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsModelValid = false;
+                model.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
+                return View(model);
+            }
             User user = new User();
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
