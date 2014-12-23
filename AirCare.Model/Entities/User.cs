@@ -18,7 +18,7 @@ namespace AirCare.Model.Entities
 
         public string UserName { get; set; }
         public string Password { get; set; }
-        public String FirstName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SequrityQuestion { get; set; }
         public string Answer { get; set; }
