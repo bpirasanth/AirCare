@@ -8,27 +8,17 @@ namespace AirCare.Web.ViewModels
 {
     public class UserViewModel
     {
-        [Required, Display(Name = "First Name")]
-        public string FirstName { get; set; }
-        [Required, Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-        [Required, Display(Name = "User Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter User Name"), Display(Name = "User Name")]
         public string UserName { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter Password")]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter First Name"), Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter Last Name"), Display(Name = "Last Name")]
+        public string LastName { get; set; }
         [Display(Name = "Security Question")]
         public string SecurityQuestion { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter Answer")]
         public string Answer { get; set; }
 
         public IList<String> SecurityQuestions { get; set; }
