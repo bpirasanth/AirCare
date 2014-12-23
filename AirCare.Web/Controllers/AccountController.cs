@@ -1,4 +1,5 @@
-﻿using AirCare.Model.Entities;
+﻿using AirCare.Data;
+using AirCare.Model.Entities;
 using AirCare.Web.Core;
 using AirCare.Web.Models;
 using AirCare.Web.ViewModels;
@@ -7,16 +8,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace AirCare.Web.Controllers
 {
     public class AccountController : Controller
-    {     
+    {
+        [AllowAnonymous]
         public ActionResult Login()
         {
+            ViewBag.IsModelValid = true;
+            bool IsLoggedIn = (System.Web.HttpContext.Current.User != null) &&
+                      System.Web.HttpContext.Current.User.Identity.IsAuthenticated &&
+                      !String.IsNullOrWhiteSpace(UowFactory.ConnectionString);
+
+            if (IsLoggedIn)
+            {
+                return RedirectToAction("Index", "Client");
+            }
             return View();
         }
 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsModelValid = false;
+                ModelState.AddModelError("", "Username or pasword you provided is not valid.");
+                return View(model);
+            }
+
+            if (!WebSecurity.Login(model.UserName, model.Password, persistCookie: false))
+            {
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Client");
+        }
         public ActionResult SignUp()
         {
             UserViewModel model = new UserViewModel();
@@ -38,7 +70,7 @@ namespace AirCare.Web.Controllers
 
             UserModel model = new UserModel();
             model.Save(vModel);
-            
+
             return RedirectToAction("Index", "Client");
         }
 
