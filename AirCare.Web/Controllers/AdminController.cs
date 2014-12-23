@@ -40,6 +40,25 @@ namespace AirCare.Web.Controllers
         }
 
 
+        public ActionResult AddAirport()
+        {
+            AirportViewModel airportViewModel = new AirportViewModel();
+            ViewBag.IsModelValid = true;
+            return View(airportViewModel);
+        }
+        [HttpPost]
+        public ActionResult AddAirport(AirportViewModel airportViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsModelValid = false;
+                return View(airportViewModel);
+            }
+            AirportModel airportModel = new AirportModel();
+            airportModel.Save(airportViewModel);
+            return RedirectToAction("Index", "Admin");
+        }
+
 
 
     }
