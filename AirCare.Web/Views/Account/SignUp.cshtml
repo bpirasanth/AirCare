@@ -4,66 +4,76 @@
     ViewBag.Title = "Sign Up";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2 class="section-heading">
-    Sign Up<br>
-</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(false, "", new { @class = (!ViewBag.IsModelValid) ? "alert alert-danger" : "" })
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">New Custome Sign Up</div>
+    <div class="panel-body">
 
 
-    <fieldset class="form-horizontal">
-        <div class="form-group">
 
 
-            @Html.LabelFor(m => m.FirstName, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.FirstName)
-                @Html.ValidationMessageFor(m => m.FirstName, String.Empty, new { @class = "text-danger" })
-            </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = (!ViewBag.IsModelValid) ? "alert alert-danger" : "" })
 
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.LastName, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.LastName)
-                @Html.ValidationMessageFor(m => m.LastName, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.UserName, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SecurityQuestion, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.SecurityQuestion, new SelectList(Model.SecurityQuestions), "-- Please Select --")
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Answer, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Answer)
-                @Html.ValidationMessageFor(m => m.Answer, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <input type="submit" id="btnSumbit" class="btn btn-primary"
-                       value="Sign Up" />
-            </div>
-        </div>
-    </fieldset>
-}
+
+
+
+
+            <fieldset class="form-horizontal">
+                <div class="form-group">
+
+
+                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter your first name" })
+                        @Html.ValidationMessageFor(m => m.FirstName, String.Empty, new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter your last name" })
+                        @Html.ValidationMessageFor(m => m.LastName, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Enter user name" })
+                        @Html.ValidationMessageFor(m => m.UserName, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter password" })
+                        @Html.ValidationMessageFor(m => m.Password, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SecurityQuestion, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-5">
+                        @Html.DropDownListFor(m => m.SecurityQuestion, new SelectList(Model.SecurityQuestions), "-- Please Select --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Answer, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(m => m.Answer, new { @class = "form-control", @placeholder = "Enter your answer" })
+                        @Html.ValidationMessageFor(m => m.Answer, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <input type="submit" id="btnSumbit" class="btn btn-primary"
+                               value="Sign Up" />
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
