@@ -7,7 +7,7 @@
 
 <br />
 <div class="panel panel-default">
-    <div class="panel-heading">New Custome Sign Up</div>
+    <div class="panel-heading">New Customer Sign Up</div>
     <div class="panel-body">
 
 
@@ -54,6 +54,15 @@
                         @Html.ValidationMessageFor(m => m.Password, String.Empty, new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Enter confirm password" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+
                 <div class="form-group">
                     @Html.LabelFor(m => m.SecurityQuestion, new { @class = "control-label col-lg-2 col-lg-2" })
                     <div class="col-lg-5">

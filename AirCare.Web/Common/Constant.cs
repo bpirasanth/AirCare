@@ -16,5 +16,11 @@ namespace AirCare.Web.Core
 			"What was the make and model of your first car?",
 			"What was your maternal grandfather's first name?",
 			"In what city or town does your nearest sibling live?" };
+
+        public static String[] AIRLINES = { "Deutsche Lufthansa",
+			"United Continental Holdings", "Delta Air Lines", "Air France-KLM",
+			"American Airlines Group", "International Airlines Group",
+			"Southwest Airlines", "All Nippon Airways",
+			"China Southern Airlines", "Qantas Airways" };
     }
 }
