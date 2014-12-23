@@ -40,6 +40,26 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="/Account/LogOut" data-toggle="tooltip"
+                               data-placement="bottom" title="Log-Out">
+                                <i class="glyphicon glyphicon-log-out"></i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="/Account/SignUp"><i class="glyphicon glyphicon-user"></i>  Sign Up  </a>
+                        </li>
+                        <li>
+                            <a href="/Account/Login" data-toggle="tooltip"
+                               data-placement="bottom" title="Log-In"><i class="glyphicon glyphicon-log-in"></i></a>
+                        </li>
+                    }
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -86,4 +106,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-

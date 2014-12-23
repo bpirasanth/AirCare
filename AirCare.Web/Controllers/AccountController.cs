@@ -75,5 +75,15 @@ namespace AirCare.Web.Controllers
             return RedirectToAction("Index", "Client");
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            WebSecurity.Logout();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Index", "Client");
+        }
+
     }
 }
