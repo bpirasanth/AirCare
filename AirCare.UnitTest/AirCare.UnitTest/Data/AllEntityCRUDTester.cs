@@ -31,7 +31,7 @@ namespace AirCare.UnitTest.Data
         [TestMethod]
         public void CreateDB()
         {
-            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "admin", Password = "admin", SequrityQuestion = "What is your pet name?", Answer = "jimbo" };
+            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "admin", Password = "admin", SecurityQuestion = "What is your pet name?", Answer = "jimbo" };
             var repo = Uow.GetEntityRepository<User>().InsertOrUpdate(user);
             Uow.Commit();
         }

@@ -1,5 +1,6 @@
 ﻿using AirCare.Model.Entities;
 using AirCare.Web.Core;
+using AirCare.Web.Models;
 using AirCare.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace AirCare.Web.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {     
         public ActionResult Login()
         {
@@ -18,7 +19,7 @@ namespace AirCare.Web.Controllers
 
         public ActionResult SignUp()
         {
-            SignUpViewModel model = new SignUpViewModel();
+            UserViewModel model = new UserViewModel();
             ViewBag.IsModelValid = true;
             model.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
 
@@ -26,25 +27,18 @@ namespace AirCare.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(SignUpViewModel model)
+        public ActionResult SignUp(UserViewModel vModel)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.IsModelValid = false;
-                model.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
-                return View(model);
+                vModel.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
+                return View(vModel);
             }
-            User user = new User();
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.UserName = model.UserName;
-            user.Password = model.Password;
-            user.SequrityQuestion = model.SecurityQuestion;
-            user.Answer = model.Answer;
 
-
-            UnitOfWork.GetEntityRepository<User>().InsertOrUpdate(user);
-            UnitOfWork.Commit();
+            UserModel model = new UserModel();
+            model.Save(vModel);
+            
             return RedirectToAction("Index", "Client");
         }
 

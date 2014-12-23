@@ -6,7 +6,7 @@ using System.Web;
 
 namespace AirCare.Web.ViewModels
 {
-    public class SignUpViewModel
+    public class UserViewModel
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter User Name"), Display(Name = "User Name")]
         public string UserName { get; set; }
