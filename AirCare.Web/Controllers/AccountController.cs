@@ -43,6 +43,7 @@ namespace AirCare.Web.Controllers
 
             if (!WebSecurity.Login(model.UserName, model.Password, persistCookie: false))
             {
+                ViewBag.IsModelValid = false;
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return View(model);
             }
