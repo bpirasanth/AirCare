@@ -173,6 +173,7 @@
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -180,6 +181,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AirCare.Data\AirCare.Data.csproj">
+      <Project>{356bdf0d-5999-4076-a32e-67161487d119}</Project>
+      <Name>AirCare.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AirCare.Model\AirCare.Model.csproj">
+      <Project>{a8d31fb5-4f70-4939-a385-1e447dd1974c}</Project>
+      <Name>AirCare.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
