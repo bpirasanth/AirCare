@@ -1,0 +1,48 @@
+﻿@model AirCare.Web.ViewModels.FlightViewModel
+
+@{
+    ViewBag.Title = "AddFlight";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddFlight</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Add New Flight</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = (!ViewBag.IsModelValid) ? "alert alert-danger" : "" })
+    <fieldset class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Airline, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.Airline, new { @class = "form-control", @placeholder = "Enter Airline Name" })
+                @Html.ValidationMessageFor(model => model.Airline, String.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FlightNumber, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.FlightNumber, new { @class = "form-control", @placeholder = "Enter Flight Number" })
+                @Html.ValidationMessageFor(model => model.FlightNumber, String.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <input type="submit" id="btnSumbit" class="btn btn-primary"
+                       value="Add Flight" />
+            </div>
+        </div>
+
+    </fieldset>
+        }
+
+    </div>
+</div>

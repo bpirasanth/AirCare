@@ -15,7 +15,6 @@ namespace AirCare.Model.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         public string Airline { get; set; }
         public string FlightNumber { get; set; }
     }
