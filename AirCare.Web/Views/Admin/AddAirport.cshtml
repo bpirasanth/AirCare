@@ -1,65 +1,69 @@
 ﻿@model AirCare.Web.ViewModels.AirportViewModel
 
 @{
-    ViewBag.Title = "Add Airport";
+    ViewBag.Title = "AddAirport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <br />
-<div class="panel panel-default">
-    <div class="panel-heading">Add Airport</div>
-    <div class="panel-body">
 
+<div class="panel panel-default">
+    <div class="panel-heading">Add New Airport</div>
+    <div class="panel-body">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+            @Html.ValidationSummary(false, "", new { @class = (!ViewBag.IsModelValid) ? "alert alert-danger" : "" })
 
-            <fieldset class="form-horizontal">
+    <fieldset class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Enter Airport Name" })
+                @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "text-danger" })
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-lg-2 col-lg-2" })
 
-                    <div class="col-lg-3">
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Enter Airport Name" })
-                        @Html.ValidationMessageFor(model => model.Name)
-                    </div>
-                </div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Location, new { @class = "control-label col-lg-2 col-lg-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Enter Airport Location" })
+                @Html.ValidationMessageFor(model => model.Location, String.Empty, new { @class = "text-danger" })
 
-                    <div class="col-lg-3">
-                        @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Enter Location" })
-                        @Html.ValidationMessageFor(model => model.Location)
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-lg-2 col-lg-2" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control", @placeholder = "Enter Latitude" })
+                @Html.ValidationMessageFor(model => model.Latitude, String.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
 
-                    <div class="col-lg-3">
-                        @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Latitude)
-                    </div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-lg-2 col-lg-2" })
+            <div class="col-lg-3">
+                @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control", @placeholder = "Enter Longitude" })
+                @Html.ValidationMessageFor(model => model.Longitude, String.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-lg-2 col-lg-2" })
 
-                    <div class="col-lg-3">
-                        @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Longitude)
-                    </div>
-                </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <input type="submit" id="btnSumbit" class="btn btn-primary"
+                       value="Add Airport" />
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <input type="submit" id="btnSumbit" class="btn btn-primary"
-                               value="Add Airport" />
-                    </div>
-                </div>
-            </fieldset>
+    </fieldset>
+        }
+
+       
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
         }
     </div>
 </div>
