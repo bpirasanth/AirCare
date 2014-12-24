@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirCare.Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace AirCare.Web.ViewModels
         [Required]
         public string Answer { get; set; }
 
+        public IList<Role> Roles { get; set; }
         public IList<String> SecurityQuestions { get; set; }
     }
 }

@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 
 namespace AirCare.Model.Entities
 {
-    [Table("User")]
-    public class User : IIdentifier
+    public class Role : IIdentifier
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string SecurityQuestion { get; set; }
-        public string Answer { get; set; }
-        
-        public virtual ICollection<Role> Roles { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
+
 
     }
 }

@@ -22,5 +22,11 @@ namespace AirCare.Web.Models
             UnitOfWork.Commit();
 
         }
+
+        public Role GetClientRole()
+        {
+            return UnitOfWork.GetEntityRepository<Role>().GetAll()
+                    .FirstOrDefault(p => p.Name == "Client");
+        }
     }
 }

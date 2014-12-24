@@ -23,6 +23,7 @@ namespace AirCare.Data
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Configurations.Add(new PathConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
         }
 
         public DbSet<User> User { get; set; }
@@ -31,5 +32,6 @@ namespace AirCare.Data
         public DbSet<Passenger> Passenger { get; set; }
         public DbSet<Path> Path { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
+        public DbSet<Role> Role { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using WebMatrix.WebData;
 
 namespace AirCare.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         [AllowAnonymous]
         public ActionResult Login()
@@ -70,6 +70,7 @@ namespace AirCare.Web.Controllers
             }
 
             UserModel model = new UserModel();
+            vModel.Roles = new List<Role>() { model.GetClientRole() };
             model.Save(vModel);
 
             return RedirectToAction("Index", "Client");

@@ -12,7 +12,7 @@ namespace AirCare.Web.Controllers
     {
         //
         // GET: /Flight/
-        
+
 
         public ActionResult Index()
         {
@@ -35,8 +35,8 @@ namespace AirCare.Web.Controllers
                 return View(flightViewModel);
             }
             FlightModel flightModel = new FlightModel();
-           flightModel.Save(flightViewModel);
-           return RedirectToAction("Index", "Admin");
+            flightModel.Save(flightViewModel);
+            return RedirectToAction("Index", "Admin");
         }
 
 
@@ -54,6 +54,7 @@ namespace AirCare.Web.Controllers
                 ViewBag.IsModelValid = false;
                 return View(airportViewModel);
             }
+           
             AirportModel airportModel = new AirportModel();
             airportModel.Save(airportViewModel);
             return RedirectToAction("Index", "Admin");
