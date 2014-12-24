@@ -7,7 +7,7 @@
 
 <br />
 <div class="panel panel-default">
-    <div class="panel-heading">New Customer Sign Up</div>
+    <div class="panel-heading">Sign Up</div>
     <div class="panel-body">
 
 
@@ -65,7 +65,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.SecurityQuestion, new { @class = "control-label col-lg-2 col-lg-2" })
-                    <div class="col-lg-5">
+                    <div class="col-lg-6">
                         @Html.DropDownListFor(m => m.SecurityQuestion, new SelectList(Model.SecurityQuestions), "-- Please Select --", new { @class = "form-control" })
                     </div>
                 </div>

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\PathConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Core\BaseContext.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />

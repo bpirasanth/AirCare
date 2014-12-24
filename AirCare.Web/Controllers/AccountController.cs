@@ -43,6 +43,7 @@ namespace AirCare.Web.Controllers
 
             if (!WebSecurity.Login(model.UserName, model.Password, persistCookie: false))
             {
+                ViewBag.IsModelValid = false;
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return View(model);
             }
@@ -69,8 +70,19 @@ namespace AirCare.Web.Controllers
             }
 
             UserModel model = new UserModel();
+            vModel.Roles = new List<Role>() { model.GetClientRole() };
             model.Save(vModel);
 
+            return RedirectToAction("Index", "Client");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            WebSecurity.Logout();
+            Session.RemoveAll();
+            Session.Abandon();
             return RedirectToAction("Index", "Client");
         }
 

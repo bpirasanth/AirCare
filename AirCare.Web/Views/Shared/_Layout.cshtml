@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using AirCare.Web.Models;
+@using AirCare.Web.Common;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,20 +28,59 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">AirCare</a>
+                <a class="navbar-brand" href="/">AirCare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">About</a>
+                        <a href="/"><i class="glyphicon glyphicon-home"></i> Home </a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#"><i class="glyphicon glyphicon-envelope"></i> Contact </a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Client)))
+                    {
+                        <li>
+                            <a href="/Client/AddPassenger"><i class="glyphicon glyphicon-plus"></i> Passenger </a>
+                        </li>
+                    }
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Admin)))
+                    {
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-tasks"></i> Schedule </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-circle-arrow-up"></i> Path </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/AddFlight"><i class="glyphicon glyphicon-plane"></i> Flight </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/AddAirport"><i class="glyphicon glyphicon-map-marker"></i> Airport </a>
+                        </li>
+                    }
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="/Account/LogOut" data-toggle="tooltip"
+                               data-placement="bottom" title="Log-Out">
+                                <i class="glyphicon glyphicon-log-out"></i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="/Account/SignUp"><i class="glyphicon glyphicon-user"></i>  Sign Up  </a>
+                        </li>
+                        <li>
+                            <a href="/Account/Login" data-toggle="tooltip"
+                               data-placement="bottom" title="Log-In"><i class="glyphicon glyphicon-log-in"></i></a>
+                        </li>
+                    }
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -52,38 +93,19 @@
             @RenderBody()
         </div>
     </div>
-    <!-- Footer -->
-    <footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <!-- Footer -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#home">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
                     <p class="copyright text-muted small">Copyright &copy; AirCare 2014. All Rights Reserved</p>
                 </div>
             </div>
         </div>
-    </footer>
-
+    </nav>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
-

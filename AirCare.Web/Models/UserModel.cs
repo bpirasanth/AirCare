@@ -1,4 +1,5 @@
 ﻿using AirCare.Model.Entities;
+using AirCare.Web.Common;
 using AirCare.Web.ViewModels;
 using AutoMapper;
 using System;
@@ -21,6 +22,12 @@ namespace AirCare.Web.Models
             UnitOfWork.GetEntityRepository<User>().InsertOrUpdate(user);
             UnitOfWork.Commit();
 
+        }
+
+        public Role GetClientRole()
+        {
+            return UnitOfWork.GetEntityRepository<Role>().GetAll()
+                    .FirstOrDefault(p => p.Name == EnumRoles.Client);
         }
     }
 }

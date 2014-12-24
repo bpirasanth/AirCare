@@ -31,7 +31,7 @@ namespace AirCare.UnitTest.Data
         [TestMethod]
         public void CreateDB()
         {
-            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "admin", Password = "admin", SecurityQuestion = "What is your pet name?", Answer = "jimbo" };
+            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "sysadmin", Password = "sysadmin", SecurityQuestion = "What is your pet name?", Answer = "jimbo" };
             var repo = Uow.GetEntityRepository<User>().InsertOrUpdate(user);
             Uow.Commit();
         }
@@ -41,10 +41,10 @@ namespace AirCare.UnitTest.Data
         {
             var userId = Uow.GetEntityRepository<User>()
                     .GetAll()
-                    .Where(s => s.UserName.Equals("admin"))
+                    .Where(s => s.UserName.Equals("sysadmin"))
                     .Select(s => s.Id).SingleOrDefault();
 
-            Assert.AreEqual(userId, 1);
+            Assert.AreEqual(userId, 2);
         }
     }
 }
