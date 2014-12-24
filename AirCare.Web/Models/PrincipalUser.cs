@@ -3,6 +3,7 @@ using AirCare.Data.Core;
 using AirCare.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Security.Principal;
@@ -26,6 +27,7 @@ namespace AirCare.Web.Models
             PrincipalUser user = HttpContext.Current.User as PrincipalUser;
             if (user == null)
             {
+                UowFactory.ConnectionString = UowFactory.ConnectionString = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
                 IUnitOfWork UnitOfWork = UowFactory.Create();
                 user = PrincipalUser.GetPrincipalUser(UnitOfWork, HttpContext.Current.User.Identity);
                 HttpContext.Current.User = user;
