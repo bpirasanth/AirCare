@@ -4,6 +4,9 @@
     ViewBag.Title = "AddAirport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+<script src="~/Content/Custom/js/locationpicker.jquery.js"></script>
 <br />
 
 <div class="panel panel-default">
@@ -14,56 +17,88 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false, "", new { @class = (!ViewBag.IsModelValid) ? "alert alert-danger" : "" })
 
-    <fieldset class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-3">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Enter Airport Name" })
-                @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "text-danger" })
+            <fieldset class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.Name, new {  @class = "form-control", @placeholder = "Enter Airport Name" })
+                        @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "text-danger" })
 
 
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-3">
-                @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Enter Airport Location" })
-                @Html.ValidationMessageFor(model => model.Location, String.Empty, new { @class = "text-danger" })
-
-
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-3">
-                @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control", @placeholder = "Enter Latitude" })
-                @Html.ValidationMessageFor(model => model.Latitude, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-lg-2 col-lg-2" })
-            <div class="col-lg-3">
-                @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control", @placeholder = "Enter Longitude" })
-                @Html.ValidationMessageFor(model => model.Longitude, String.Empty, new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Location, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextAreaFor(model => model.Location, new {@rows = 4, @id = "location", @class = "form-control", @placeholder = "Enter Airport Location" })
+                        @Html.ValidationMessageFor(model => model.Location, String.Empty, new { @class = "text-danger" })
 
 
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <input type="submit" id="btnSumbit" class="btn btn-primary"
-                       value="Add Airport" />
-            </div>
-        </div>
+                    </div>
 
-    </fieldset>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-lg-2 col-lg-2"></div>
+                    
+                    <div  class="col-lg-5">
+                        <div id="map" style="width: 259px; height: 200px;"></div>   
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.Latitude, new { @readonly = "readonly", @id = "latitude", @class = "form-control", @placeholder = "Enter Latitude" })
+                        @Html.ValidationMessageFor(model => model.Latitude, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-lg-2 col-lg-2" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.Longitude, new { @readonly = "readonly", @id = "longitude", @class = "form-control", @placeholder = "Enter Longitude" })
+                        @Html.ValidationMessageFor(model => model.Longitude, String.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                
+
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <input type="submit" id="btnSumbit" class="btn btn-primary"
+                               value="Add Airport" />
+                    </div>
+                </div>
+
+
+
+
+            </fieldset>
         }
 
-       
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#map').locationpicker({
+        location: {
+            latitude: 41.534133,
+            longitude: -93.658796
+        },
+        radius: 0,
+        zoom: 15,
+        inputBinding: {
+            latitudeInput: $('#latitude'),
+            longitudeInput: $('#longitude'),
+            locationNameInput: $('#location')
+        },
+        enableAutocomplete: true,
+        enableReverseGeocode: true,
+    });
+</script>
