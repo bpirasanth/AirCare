@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using AirCare.Web.Models;
+@using AirCare.Web.Common;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,15 +34,34 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">About</a>
+                        <a href="/"><i class="glyphicon glyphicon-home"></i> Home </a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#"><i class="glyphicon glyphicon-envelope"></i> Contact </a>
                     </li>
 
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Client)))
+                    {
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-plus"></i> Passenger </a>
+                        </li>
+                    }
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Admin)))
+                    {
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-tasks"></i> Schedule </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-circle-arrow-up"></i> Path </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/AddFlight"><i class="glyphicon glyphicon-plane"></i> Flight </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/AddAirport"><i class="glyphicon glyphicon-map-marker"></i> Airport </a>
+                        </li>
+                    }
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
                         <li>
