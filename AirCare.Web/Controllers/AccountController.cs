@@ -12,7 +12,7 @@ using WebMatrix.WebData;
 
 namespace AirCare.Web.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         [AllowAnonymous]
         public ActionResult Login()
