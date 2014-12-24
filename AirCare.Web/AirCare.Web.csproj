@@ -164,6 +164,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\css\datepicker\datepicker.css" />
+    <Content Include="Content\Custom\js\aircare.js" />
+    <Content Include="Content\Custom\js\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\Custom\js\datepicker\datepicker.js" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />

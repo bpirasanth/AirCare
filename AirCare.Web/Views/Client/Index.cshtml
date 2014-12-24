@@ -1,6 +1,72 @@
 ﻿@{
-    ViewBag.Title = "Client Home";
+    ViewBag.Title = "Welcome to Air Care";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Client Home</h2>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<link href="~/Content/Custom/css/datepicker/datepicker.css" rel="stylesheet" />
+
+<h2 class="section-heading">
+    Welcome to Air Care
+    <br />
+</h2>
+<div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label for="originSearch">
+                Origin
+            </label>
+            <div>
+                <input type="text" id="originSearch" value=""
+                       onkeyup="madeAjaxCall('originSearch');">
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <label for="destinationSearch">
+                Destination
+            </label>
+            <div>
+                <input type="text" id="destinationSearch" value=""
+                       onkeyup="madeAjaxCall('destinationSearch');">
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <label for="departureDate">
+                Departure Date
+            </label>
+            <div>
+                <input type="text" id="departureDate" value="">
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <label for="arrivalDate">
+                Arrival Date
+            </label>
+            <div>
+                <input type="text" id="arrivalDate" value="">
+            </div>
+            <br />
+        </div>
+
+        <div class="col-lg-3">
+            <div>
+                <input type="submit" id="btnSearch" class="btn btn-primary"
+                       onclick="search();"
+                       value="Search" />
+            </div>
+            <br /> <br />
+        </div>
+    </div>
+</div>
+
+<div id="result" class="col-lg-4">
+
+</div>
+
+<div class="col-lg-8" id="map-canvas"></div>
+
+<script src="~/Content/Custom/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="~/Content/Custom/js/datepicker/datepicker.js"></script>
