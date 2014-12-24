@@ -36,13 +36,13 @@ namespace AirCare.Web.Models
         public static PrincipalUser GetPrincipalUser(IUnitOfWork UnitOfWork, IIdentity identity)
         {
             var user = UnitOfWork.GetEntityRepository<User>().GetAll()
-               .FirstOrDefault(p => p.UserName == identity.Name);
+               .FirstOrDefault(u => u.UserName == identity.Name);
 
             if (user == null)
                 throw new HttpException((int)HttpStatusCode.Unauthorized, "Unautherized User");
 
-            PrincipalUser mdl = new PrincipalUser(identity, user.Roles.Select(p => p.Name).ToList());
-            return mdl;
+            PrincipalUser pUser = new PrincipalUser(identity, user.Roles.Select(r => r.Name).ToList());
+            return pUser;
         }
 
 
