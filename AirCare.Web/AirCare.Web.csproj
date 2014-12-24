@@ -145,6 +145,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\FlightModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PassengerModel.cs" />
     <Compile Include="Models\PrincipalUser.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Security\CustomRoleProvider.cs" />
     <Compile Include="ViewModels\AirportViewModel.cs" />
     <Compile Include="ViewModels\FlightViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +232,7 @@
     <Content Include="Views\Admin\AddFlight.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AddAirport.cshtml" />
+    <Content Include="Views\Client\AddPassenger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -43,7 +43,7 @@
                     @if (HttpContext.Current.User.Identity.IsAuthenticated && (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Client)))
                     {
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-plus"></i> Passenger </a>
+                            <a href="/Client/AddPassenger"><i class="glyphicon glyphicon-plus"></i> Passenger </a>
                         </li>
                     }
 
