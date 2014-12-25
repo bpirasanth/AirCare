@@ -33,9 +33,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/Client/Home"><i class="glyphicon glyphicon-home"></i> Home </a>
-                    </li>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="/Client/Home"><i class="glyphicon glyphicon-home"></i> Home </a>
+                        </li>
+                    }
                     <li>
                         <a href="#"><i class="glyphicon glyphicon-envelope"></i> Contact </a>
                     </li>

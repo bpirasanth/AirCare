@@ -24,10 +24,8 @@ namespace AirCare.Web.Controllers
             if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated &&
                 (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Admin)))
                 return RedirectToAction("Index", "Admin");
-            else if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-                return View();
             else
-                return RedirectToAction("Index", "Client");
+                return View();
         }
 
         public ActionResult AddPassenger()
