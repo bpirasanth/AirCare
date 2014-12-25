@@ -27,8 +27,8 @@ namespace AirCare.Web.Controllers
 
         [HttpPost]
         public ActionResult AddPassenger(PassengerViewModel passengerViewModel)
-        { 
-            if(!ModelState.IsValid)
+        {
+            if (!ModelState.IsValid)
             {
                 ViewBag.IsModelValid = false;
                 return View(passengerViewModel);
@@ -38,10 +38,7 @@ namespace AirCare.Web.Controllers
             PassengerModel passengerModel = new PassengerModel();
             passengerModel.Save(passengerViewModel);
 
-            return   RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Admin");
         }
-        
-        
-
     }
 }

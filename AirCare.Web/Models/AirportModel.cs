@@ -19,5 +19,11 @@ namespace AirCare.Web.Models
             UnitOfWork.Commit();
 
         }
+
+        public IList<Airport> GetAirportsByFilter(string filter)
+        {
+            return UnitOfWork.GetEntityRepository<Airport>().GetAll()
+                    .Where(a => a.Name.StartsWith(filter)).ToList();
+        }
     }
 }

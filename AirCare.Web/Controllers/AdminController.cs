@@ -54,13 +54,24 @@ namespace AirCare.Web.Controllers
                 ViewBag.IsModelValid = false;
                 return View(airportViewModel);
             }
-           
+
             AirportModel airportModel = new AirportModel();
             airportModel.Save(airportViewModel);
             return RedirectToAction("Index", "Admin");
         }
 
+        [HttpPost]
+        public JsonResult GetAirportsByFilter(string filter)
+        {
+            AirportModel airportModel = new AirportModel();
+            return Json(airportModel.GetAirportsByFilter(filter).Select(a => a.Name));
+        }
 
 
+        [HttpPost]
+        public JsonResult GetSchedulesByFilter(string origin, string destination, string departureDate, string arrivalDate)
+        {
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

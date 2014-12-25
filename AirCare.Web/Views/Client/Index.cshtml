@@ -5,6 +5,15 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <link href="~/Content/Custom/css/datepicker/datepicker.css" rel="stylesheet" />
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<style>
+    html, body, #map-canvas {
+        height: 300px;
+    }
+</style>
+
+
 
 <h2 class="section-heading">
     Welcome to Air Care
@@ -62,11 +71,10 @@
     </div>
 </div>
 
-<div id="result" class="col-lg-4">
-
-</div>
+<div id="result" class="col-lg-4"></div>
 
 <div class="col-lg-8" id="map-canvas"></div>
 
 <script src="~/Content/Custom/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="~/Content/Custom/js/datepicker/datepicker.js"></script>
+<script src="~/Content/Custom/js/aircare.js"></script>
