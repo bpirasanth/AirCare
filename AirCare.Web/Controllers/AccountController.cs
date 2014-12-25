@@ -48,7 +48,7 @@ namespace AirCare.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Client");
+            return RedirectToAction("Home", "Client");
         }
         public ActionResult SignUp()
         {

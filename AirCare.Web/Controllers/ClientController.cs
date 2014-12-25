@@ -1,4 +1,5 @@
-﻿using AirCare.Web.Models;
+﻿using AirCare.Web.Common;
+using AirCare.Web.Models;
 using AirCare.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,17 @@ namespace AirCare.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Home()
+        {
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated &&
+                (PrincipalUser.GetCurrentUser().Roles.Contains(EnumRoles.Admin)))
+                return RedirectToAction("Index", "Admin");
+            else if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                return View();
+            else
+                return RedirectToAction("Index", "Client");
         }
 
         public ActionResult AddPassenger()
@@ -38,7 +50,7 @@ namespace AirCare.Web.Controllers
             PassengerModel passengerModel = new PassengerModel();
             passengerModel.Save(passengerViewModel);
 
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Home", "Client");
         }
     }
 }
