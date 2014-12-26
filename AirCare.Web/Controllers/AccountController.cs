@@ -15,7 +15,7 @@ namespace AirCare.Web.Controllers
     public class AccountController : Controller
     {
         [AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.IsModelValid = true;
             bool IsLoggedIn = (System.Web.HttpContext.Current.User != null) &&
@@ -26,13 +26,16 @@ namespace AirCare.Web.Controllers
             {
                 return RedirectToAction("Index", "Client");
             }
+
+            ViewBag.ReturnUrl = String.IsNullOrWhiteSpace(returnUrl) ? "/Client/Index" : returnUrl;
+
             return View();
         }
 
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -48,8 +51,21 @@ namespace AirCare.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Home", "Client");
+            return RedirectToLocal(returnUrl);
         }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Client");
+            }
+        }
+
         public ActionResult SignUp()
         {
             UserViewModel model = new UserViewModel();

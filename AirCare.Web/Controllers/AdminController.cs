@@ -1,4 +1,5 @@
 ﻿using AirCare.Web.Models;
+using AirCare.Web.Security;
 using AirCare.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AirCare.Web.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         //

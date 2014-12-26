@@ -1,5 +1,6 @@
 ﻿using AirCare.Web.Common;
 using AirCare.Web.Models;
+using AirCare.Web.Security;
 using AirCare.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace AirCare.Web.Controllers
                 return View();
         }
 
+        [CustomAuthorize(Roles = "Client")]
         public ActionResult AddPassenger()
         {
             PassengerViewModel passengerViewModel = new PassengerViewModel();
