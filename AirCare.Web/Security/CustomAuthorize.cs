@@ -18,7 +18,7 @@ namespace AirCare.Web.Security
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             if (!filterContext.HttpContext.Request.IsAuthenticated)
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login", returnUrl = filterContext.HttpContext.Request.Url.LocalPath }));
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login", ReturnUrl = filterContext.HttpContext.Request.Url.LocalPath }));
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
                 if (!String.IsNullOrEmpty(Roles))

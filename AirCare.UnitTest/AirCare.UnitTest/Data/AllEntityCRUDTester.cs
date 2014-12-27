@@ -6,6 +6,7 @@ using AirCare.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AirCare.Model.Entities;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace AirCare.UnitTest.Data
 {
@@ -31,7 +32,8 @@ namespace AirCare.UnitTest.Data
         [TestMethod]
         public void CreateDB()
         {
-            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "sysadmin", Password = "sysadmin", SecurityQuestion = "What is your pet name?", Answer = "jimbo" };
+            SHA1CryptoServiceProvider sha1csp = new SHA1CryptoServiceProvider();
+            var user = new User { FirstName = "Admin", LastName = "Admin", UserName = "sysadmin", Sha1Password = sha1csp.ComputeHash(Encoding.Unicode.GetBytes( "sysadmin")), SecurityQuestion = "What is your pet name?", Answer = "jimbo" };
             var repo = Uow.GetEntityRepository<User>().InsertOrUpdate(user);
             Uow.Commit();
         }

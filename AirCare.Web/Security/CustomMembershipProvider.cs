@@ -2,6 +2,8 @@
 using AirCare.Data.Core;
 using AirCare.Model.Entities;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using WebMatrix.WebData;
 
 namespace AirCare.Web.Security
@@ -11,13 +13,17 @@ namespace AirCare.Web.Security
         public override bool ValidateUser(string username, string password)
         {
             IUnitOfWork UnitOfWork = UowFactory.Create();
-            string pwd =
+            byte[] passwordBytes = Encoding.Unicode.GetBytes(password);
+            var sha1csp = new SHA1CryptoServiceProvider();
+            byte[] sha1 = sha1csp.ComputeHash(passwordBytes);
+            byte[] userPwd =
                 UnitOfWork.GetEntityRepository<User>()
                     .GetAll()
                     .Where(s => s.UserName.Equals(username))
-                    .Select(s => s.Password).SingleOrDefault();
-            if (pwd == null) return false;
-            return password.Equals(pwd);
+                    .Select(s => s.Sha1Password).SingleOrDefault();
+            if (userPwd == null) return false;
+            byte[] pw = userPwd.ToArray();
+            return sha1.SequenceEqual(pw);
 
         }
 

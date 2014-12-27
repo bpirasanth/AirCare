@@ -5,7 +5,10 @@ using AirCare.Web.Models;
 using AirCare.Web.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
@@ -54,6 +57,25 @@ namespace AirCare.Web.Controllers
             return RedirectToLocal(returnUrl);
         }
 
+        public string Decrypt(string encryptedString)
+        {
+            DESCryptoServiceProvider desProvider = new DESCryptoServiceProvider();
+            desProvider.Mode = CipherMode.ECB;
+            desProvider.Padding = PaddingMode.PKCS7;
+            string key = "abcd1234";
+            desProvider.Key = Encoding.ASCII.GetBytes(key);
+            using (MemoryStream stream = new MemoryStream(Convert.FromBase64String(encryptedString)))
+            {
+                using (CryptoStream cs = new CryptoStream(stream, desProvider.CreateDecryptor(), CryptoStreamMode.Read))
+                {
+                    using (StreamReader sr = new StreamReader(cs, Encoding.ASCII))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -85,9 +107,19 @@ namespace AirCare.Web.Controllers
                 return View(vModel);
             }
 
-            UserModel model = new UserModel();
-            vModel.Roles = new List<Role>() { model.GetClientRole() };
-            model.Save(vModel);
+            try
+            {
+                UserModel model = new UserModel();
+                vModel.Roles = new List<Role>() { model.GetClientRole() };
+                model.Save(vModel);
+            }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                ViewBag.IsModelValid = false;
+                vModel.SecurityQuestions = new List<String>(Constant.SECURITY_QUESTIONS);
+                return View(vModel);
+            }
 
             return RedirectToAction("Index", "Client");
         }

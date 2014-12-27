@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,8 +16,9 @@ namespace AirCare.Data.Seed
             context.Role.Add(new Role { Name = "Admin", Description = "Administrator" });
             context.SaveChanges();
 
-            context.User.Add(new User { FirstName = "Admin", LastName = "Admin", UserName = "admin", Password = "admin", SecurityQuestion = "What is your pet name?", Answer = "jimbo", Roles = new List<Role>() { context.Role.FirstOrDefault(p => p.Name == "Admin") } });
-
+            SHA1CryptoServiceProvider sha1csp = new SHA1CryptoServiceProvider();
+            context.User.Add(new User { FirstName = "Admin", LastName = "Admin", UserName = "admin", Sha1Password = sha1csp.ComputeHash(Encoding.Unicode.GetBytes("admin")), SecurityQuestion = "What is your pet name?", Answer = "jimbo", Roles = new List<Role>() { context.Role.FirstOrDefault(p => p.Name == "Admin") } });
+            context.SaveChanges();
         }
     }
 }
