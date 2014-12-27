@@ -57,25 +57,6 @@ namespace AirCare.Web.Controllers
             return RedirectToLocal(returnUrl);
         }
 
-        public string Decrypt(string encryptedString)
-        {
-            DESCryptoServiceProvider desProvider = new DESCryptoServiceProvider();
-            desProvider.Mode = CipherMode.ECB;
-            desProvider.Padding = PaddingMode.PKCS7;
-            string key = "abcd1234";
-            desProvider.Key = Encoding.ASCII.GetBytes(key);
-            using (MemoryStream stream = new MemoryStream(Convert.FromBase64String(encryptedString)))
-            {
-                using (CryptoStream cs = new CryptoStream(stream, desProvider.CreateDecryptor(), CryptoStreamMode.Read))
-                {
-                    using (StreamReader sr = new StreamReader(cs, Encoding.ASCII))
-                    {
-                        return sr.ReadToEnd();
-                    }
-                }
-            }
-        }
-
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
